@@ -30,8 +30,10 @@ export function buildParams(filters, page) {
   if (filters.dateFrom || filters.dateTo) {
     // Venue-local range. Using startDateTime/endDateTime here also returns
     // long-running events that started years ago, so localStartDateTime is used.
-    const from = filters.dateFrom ? `${filters.dateFrom}T00:00:00` : '*'
-    const to = filters.dateTo ? `${filters.dateTo}T23:59:59` : '*'
+    // Always send both bounds (open-ended '*' ranges are less reliable).
+    const today = new Date().toLocaleDateString('en-CA')
+    const from = `${filters.dateFrom || today}T00:00:00`
+    const to = `${filters.dateTo || '2099-12-31'}T23:59:59`
     params.localStartDateTime = `${from},${to}`
   } else {
     params.startDateTime = nowUtc()
