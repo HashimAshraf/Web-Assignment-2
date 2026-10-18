@@ -1,0 +1,10 @@
+.state {
+  text-align: center;
+  padding: 56px 20px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.state h3 { margin: 0 0 6px; }
+.state p { margin: 0 0 18px; color: var(--muted); }
+.state--error { border-color: #ff5a4e66; }
