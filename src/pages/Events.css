@@ -1,0 +1,3 @@
+.events__head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.events__head h1 { margin: 0; font-size: 2rem; letter-spacing: -0.02em; }
+.events__count { margin: 0; color: var(--muted); }
