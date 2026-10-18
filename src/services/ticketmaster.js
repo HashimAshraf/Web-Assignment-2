@@ -5,7 +5,9 @@ const API_KEY = import.meta.env.VITE_TM_API_KEY
 // The API returns the literal string "Undefined" for unknown classifications.
 const clean = (value) => (value && value !== 'Undefined' ? value : '')
 
-async function request(path, params = {}, signal) {
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+async function request(path, params = {}, signal, retried = false) {
   if (!API_KEY) {
     throw new Error('Missing API key. Add VITE_TM_API_KEY to your .env file and restart the dev server.')
   }
@@ -24,6 +26,12 @@ async function request(path, params = {}, signal) {
   }
 
   if (res.status === 401) throw new Error('The Ticketmaster API key was rejected (401). Check your .env file.')
+  if (res.status === 429 && !retried) {
+    // Free keys allow 2 requests/second: wait briefly and retry once.
+    await sleep(700)
+    if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
+    return request(path, params, signal, true)
+  }
   if (res.status === 429) throw new Error('Too many requests (429). Wait a moment and try again.')
   if (res.status === 404) throw new Error('Event not found.')
   if (!res.ok) throw new Error(`Ticketmaster returned an error (${res.status}).`)
