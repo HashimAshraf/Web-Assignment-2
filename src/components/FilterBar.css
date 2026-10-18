@@ -1,0 +1,40 @@
+.filters {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 28px;
+  display: grid;
+  gap: 14px;
+}
+.filters__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; align-items: end; }
+.filters__item { display: grid; gap: 5px; }
+.filters__item span { font-size: 0.78rem; font-weight: 600; color: var(--muted); }
+.filters__item input,
+.filters__item select {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+}
+.filters__item input:focus,
+.filters__item select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.filters__clear { height: 42px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+.chip:hover { color: var(--text); background: var(--surface-2); }
+.chip--on { background: var(--accent); border-color: var(--accent); color: #fff; }
