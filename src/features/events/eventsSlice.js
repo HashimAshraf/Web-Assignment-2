@@ -6,20 +6,45 @@ export const PAGE_SIZE = 12
 // Only "now" in exact UTC, so events that already started elsewhere are hidden.
 const nowUtc = () => new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')
 
+export const defaultFilters = {
+  keyword: '',
+  category: '',
+  countryCode: '',
+  city: '',
+  dateFrom: '', // YYYY-MM-DD
+  dateTo: '',
+  sort: 'date,asc',
+}
+
+// Translate the UI filters into Ticketmaster query parameters.
+export function buildParams(filters, page) {
+  const params = {
+    keyword: filters.keyword.trim(),
+    classificationName: filters.category,
+    countryCode: filters.countryCode,
+    city: filters.city.trim(),
+    sort: filters.sort,
+    size: PAGE_SIZE,
+    page: page - 1,
+  }
+  if (filters.dateFrom || filters.dateTo) {
+    // Venue-local range. Using startDateTime/endDateTime here also returns
+    // long-running events that started years ago, so localStartDateTime is used.
+    const from = filters.dateFrom ? `${filters.dateFrom}T00:00:00` : '*'
+    const to = filters.dateTo ? `${filters.dateTo}T23:59:59` : '*'
+    params.localStartDateTime = `${from},${to}`
+  } else {
+    params.startDateTime = nowUtc()
+  }
+  return params
+}
+
 export const fetchEvents = createAsyncThunk(
   'events/fetchList',
   async (_, { getState, signal, rejectWithValue }) => {
-    const { page } = getState().events
+    const { page, filters } = getState().events
     try {
-      return await fetchEventsPage(
-        {
-          startDateTime: nowUtc(),
-          sort: 'date,asc',
-          size: PAGE_SIZE,
-          page: page - 1,
-        },
-        signal,
-      )
+      return await fetchEventsPage(buildParams(filters, page), signal)
     } catch (err) {
       return rejectWithValue(err.message)
     }
@@ -42,6 +67,8 @@ const initialState = {
   status: 'idle', // idle | loading | succeeded | failed
   error: null,
   page: 1,
+  filters: defaultFilters,
+  resetCount: 0, // bumped by resetFilters so uncontrolled inputs remount
   totalPages: 0,
   totalElements: 0,
   currentRequestId: null,
@@ -56,6 +83,15 @@ const eventsSlice = createSlice({
   reducers: {
     setPage(state, { payload }) {
       state.page = payload
+    },
+    setFilters(state, { payload }) {
+      state.filters = { ...state.filters, ...payload }
+      state.page = 1 // any filter change starts again from page 1
+    },
+    resetFilters(state) {
+      state.filters = defaultFilters
+      state.page = 1
+      state.resetCount += 1
     },
   },
   extraReducers: (builder) => {
@@ -95,5 +131,5 @@ const eventsSlice = createSlice({
   },
 })
 
-export const { setPage } = eventsSlice.actions
+export const { setPage, setFilters, resetFilters } = eventsSlice.actions
 export default eventsSlice.reducer
