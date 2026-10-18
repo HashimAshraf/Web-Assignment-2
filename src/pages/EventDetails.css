@@ -38,3 +38,8 @@
   .detail__side { position: static; }
   .detail__hero { min-height: 260px; }
 }
+
+.reg { display: grid; gap: 10px; }
+.reg__ok { margin: 0; padding: 10px 14px; border-radius: 10px; background: #3ccf9120; border: 1px solid #3ccf9166; color: var(--ok); font-weight: 600; font-size: 0.92rem; }
+.reg__confirm { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detail__side .btn { width: 100%; }
