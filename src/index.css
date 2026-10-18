@@ -1,0 +1,28 @@
+:root {
+  --bg: #0e1118;
+  --surface: #171b26;
+  --surface-2: #1f2433;
+  --border: #2a3042;
+  --text: #eef0f6;
+  --muted: #98a0b6;
+  --accent: #ff5a4e;
+  --accent-hover: #ff7468;
+  --ok: #3ccf91;
+  --warn: #f5b84b;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
