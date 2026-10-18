@@ -1,0 +1,6 @@
+.mine__title { margin: 0 0 20px; font-size: 2rem; letter-spacing: -0.02em; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; margin-bottom: 24px; }
+.tab { padding: 8px 20px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-weight: 600; cursor: pointer; }
+.tab span { margin-left: 6px; font-size: 0.8rem; opacity: 0.8; }
+.tab--on { background: var(--accent); color: #fff; }
+.mine__list { margin: 0; padding: 0; display: grid; gap: 14px; }
