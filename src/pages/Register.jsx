@@ -10,8 +10,10 @@ import {
   validateConfirm,
 } from '../utils/validators'
 import './Auth.css'
+import useDocumentTitle from '../utils/useDocumentTitle'
 
 export default function Register() {
+  useDocumentTitle('Create account')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { status, error } = useSelector((s) => s.auth)

@@ -7,8 +7,10 @@ import EventCardSkeleton from '../components/EventCardSkeleton'
 import Pagination from '../components/Pagination'
 import { ErrorMessage, EmptyState } from '../components/Feedback'
 import './Events.css'
+import useDocumentTitle from '../utils/useDocumentTitle'
 
 export default function Events() {
+  useDocumentTitle('Explore events')
   const dispatch = useDispatch()
   const { items, status, error, page, totalPages, totalElements, filters } = useSelector((s) => s.events)
 

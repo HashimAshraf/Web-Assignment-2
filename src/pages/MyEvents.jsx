@@ -6,10 +6,12 @@ import RegistrationCard from '../components/RegistrationCard'
 import { EmptyState } from '../components/Feedback'
 import { isPast } from '../utils/dates'
 import './MyEvents.css'
+import useDocumentTitle from '../utils/useDocumentTitle'
 
 const sortKey = (r) => r.event.dateTime || `${r.event.localDate}T00:00:00`
 
 export default function MyEvents() {
+  useDocumentTitle('My events')
   const registrations = useSelector(selectUserRegistrations)
   const [tab, setTab] = useState('upcoming')
 
