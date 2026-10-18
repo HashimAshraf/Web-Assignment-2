@@ -1,0 +1,40 @@
+.detail__hero {
+  position: relative;
+  min-height: 340px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--surface-2) center / cover no-repeat;
+}
+.detail__shade { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 4%, rgba(14, 17, 24, 0.55) 55%, rgba(14, 17, 24, 0.35)); }
+.detail__heroin { position: relative; width: 100%; padding-bottom: 28px; }
+.detail__heroin h1 { margin: 10px 0 0; font-size: clamp(1.7rem, 4.5vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em; max-width: 860px; }
+.detail__back { color: var(--muted); font-weight: 600; font-size: 0.9rem; }
+.detail__back:hover { color: var(--text); }
+.detail__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag { padding: 4px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); font-size: 0.78rem; font-weight: 700; }
+.tag--warn { background: var(--warn); color: #1b1300; }
+
+.detail__grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px; align-items: start; }
+.detail__main h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+.detail__main h2:first-child { margin-top: 0; }
+.detail__main p { color: #cfd3e0; white-space: pre-line; }
+.detail__note { background: var(--surface); border: 1px solid var(--border); padding: 12px 16px; border-radius: 10px; }
+.detail__muted { color: var(--muted) !important; }
+.detail__list { padding-left: 20px; color: #cfd3e0; }
+.detail__seatmap { border-radius: var(--radius); background: #fff; max-width: 560px; }
+
+.detail__side { position: sticky; top: 84px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; display: grid; gap: 16px; }
+.facts { margin: 0; display: grid; gap: 4px; }
+.facts dt { font-size: 0.74rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 10px; }
+.facts dt:first-child { margin-top: 0; }
+.facts dd { margin: 0; }
+.detail__link { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
+.detail__buy { width: 100%; }
+
+.detail__skeleton { height: 420px; border-radius: var(--radius); background: linear-gradient(90deg, var(--surface) 25%, var(--surface-2) 50%, var(--surface) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+
+@media (max-width: 860px) {
+  .detail__grid { grid-template-columns: 1fr; gap: 24px; }
+  .detail__side { position: static; }
+  .detail__hero { min-height: 260px; }
+}
