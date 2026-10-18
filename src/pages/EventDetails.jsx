@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchEventDetails } from '../features/events/eventsSlice'
+import RegisterButton from '../components/RegisterButton'
 import { ErrorMessage } from '../components/Feedback'
 import { formatDate, formatTime, formatPrice, placeLine } from '../utils/dates'
 import './EventDetails.css'
@@ -114,7 +115,7 @@ export default function EventDetails() {
             {price && (<><dt>Price</dt><dd>{price}</dd></>)}
           </dl>
 
-          <div id="register-slot" />
+          <RegisterButton event={event} />
 
           {event.url && (
             <a className="btn btn--ghost detail__buy" href={event.url} target="_blank" rel="noreferrer">
