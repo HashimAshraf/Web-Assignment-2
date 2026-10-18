@@ -5,8 +5,10 @@ import { loginUser, clearAuthError } from '../features/auth/authSlice'
 import FormField from '../components/FormField'
 import { validateEmail } from '../utils/validators'
 import './Auth.css'
+import useDocumentTitle from '../utils/useDocumentTitle'
 
 export default function Login() {
+  useDocumentTitle('Log in')
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

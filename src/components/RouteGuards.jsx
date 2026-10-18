@@ -13,6 +13,8 @@ export function ProtectedRoute() {
 // Login/Register are pointless once signed in.
 export function GuestRoute() {
   const user = useSelector(selectCurrentUser)
-  if (user) return <Navigate to="/events" replace />
+  const location = useLocation()
+  // Honour the page the user originally wanted (set by RegisterButton/ProtectedRoute).
+  if (user) return <Navigate to={location.state?.from || '/events'} replace />
   return <Outlet />
 }
